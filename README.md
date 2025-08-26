@@ -35,26 +35,30 @@ The `create_xlsx.py` script reads the master ledger in `transactions.csv`, filte
   | Currency Ratio | Exchange rate to INR                                       |
   | Price in INR   | Price per share converted to INR                           |
 
+## Setup
+
+This project uses the `uv` package manager to install and manage dependencies.
+
+```bash
+uv sync
+```
+
 ## Usage
 
-1. Install the required Python dependencies:
+Run the script using `uv`:
 
-   ```bash
-   pip install pandas openpyxl xlsxwriter
-   ```
+```bash
+uv run python create_xlsx.py
+```
 
-2. Run the script:
+## Generated Files
 
-   ```bash
-   python3 create_xlsx.py
-   ```
+Running the script will produce four files:
 
-3. The script will produce four files:
-
-   - `FY18-19.xlsx`
-   - `FY19-20.xlsx`
-   - `FY20-21.xlsx`
-   - `FY21-22.xlsx`
+- `FY18-19.xlsx`
+- `FY19-20.xlsx`
+- `FY20-21.xlsx`
+- `FY21-22.xlsx`
 
 ## Output
 
