@@ -13,7 +13,8 @@ def main():
     )
     parser.add_argument(
         "--fy",
-        choices=["FY18-19", "FY19-20", "FY20-21", "FY21-22"],
+        choices=["FY18-19", "FY19-20", "FY20-21", "FY21-22",
+                 "FY22-23", "FY23-24", "FY24-25", "FY25-26"],
         help="Financial year to process",
     )
     args = parser.parse_args()
@@ -30,6 +31,9 @@ def main():
     # Ensure TradeTime is datetime
     if df["TradeTime"].dtype == object:
         df["TradeTime"] = pd.to_datetime(df["TradeTime"], format="%m/%d/%Y")
+
+    # Convert TradeTime to date only (drop any time component)
+    df["TradeTime"] = df["TradeTime"].dt.date
 
     # Columns to include in output
     cols = [
@@ -62,8 +66,8 @@ def main():
         financial_years = [fy for fy in financial_years if fy[0] == args.fy]
 
     for fy_label, start_str, end_str in financial_years:
-        start = pd.to_datetime(start_str)
-        end = pd.to_datetime(end_str)
+        start = pd.to_datetime(start_str).date()
+        end = pd.to_datetime(end_str).date()
 
         # Sell transactions within the financial year
         sells = df[

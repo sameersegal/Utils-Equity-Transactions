@@ -34,7 +34,7 @@ The `generate_fy_transactions.py` script reads the master ledger in `transaction
 This project uses the `uv` package manager to install and manage dependencies.
 
 ```bash
-uv install
+uv sync
 ```
 
 ## Usage
