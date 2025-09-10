@@ -4,7 +4,7 @@ This repository processes raw foreign equity transaction data to prepare workshe
 
 ## Overview
 
-The `create_xlsx.py` script reads the master ledger in `transactions.csv`, filters transactions for each Indian financial year (April 1 – March 31), and generates one Excel workbook per financial year. Each workbook includes:
+The `generate_fy_transactions.py` script reads the master ledger in `transactions.csv`, filters transactions for each Indian financial year (April 1 – March 31), and generates one Excel workbook per financial year. Each workbook includes:
 
 - A **Transactions** sheet listing all `Sold` transactions in the period.
 - Separate sheets for each stock symbol sold that year containing the complete transaction history (Bought, Sold, TransferIn, TransferOut).
@@ -28,27 +28,21 @@ The `create_xlsx.py` script reads the master ledger in `transactions.csv`, filte
   | Price          | Price per share in transaction currency                    |
   | Trade Value    | Total value in transaction currency                        |
   | Currency       | Currency code (`USD`, `INR`, `CAD`)                        |
-  | Flag           | Custom flag (if any)                                       |
-  | Cost Basis     | Cost basis per share                                       |
-  | SKIPXIRR       | Internal flag                                              |
-  | Skip           | Internal flag                                              |
-  | Currency Ratio | Exchange rate to INR                                       |
-  | Price in INR   | Price per share converted to INR                           |
 
 ## Setup
 
 This project uses the `uv` package manager to install and manage dependencies.
 
 ```bash
-uv sync
+uv install
 ```
 
 ## Usage
 
-Run the script using `uv`:
+Run the script using `uv` (with optional filters):
 
 ```bash
-uv run python create_xlsx.py
+uv run python generate_fy_transactions.py [--owner OWNER ...] [--fy {FY18-19,FY19-20,FY20-21,FY21-22}]
 ```
 
 ## Generated Files
@@ -70,4 +64,4 @@ Each `FY*.xlsx` file contains:
 ## Notes
 
 - Only transactions with `Currency != INR` are processed.
-- Review the script header in `create_xlsx.py` for additional context.
+- Review the script header in `generate_fy_transactions.py` for additional context.
